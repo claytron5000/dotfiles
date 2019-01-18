@@ -1,0 +1,18 @@
+# Thanks https://github.com/jessfraz/dotfiles
+.PHONY: dotfiles
+dotfiles: ## Installs the dotfiles.
+	# add aliases for dotfiles
+	for file in $(shell find $(CURDIR) -name ".*" -not -name ".gitignore" -not -name ".travis.yml" -not -name ".git" -not -name ".*.swp" -not -name ".gnupg"); do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(HOME)/$$f; \
+	done; \
+	ln -fn $(CURDIR)/gitignore $(HOME)/.gitignore;
+	git update-index --skip-worktree $(CURDIR)/.gitconfig;
+
+.PHONY: shellcheck
+shellcheck: ## Runs the shellcheck tests on the scripts.
+	docker run --rm -i $(DOCKER_FLAGS) \
+		--name df-shellcheck \
+		-v $(CURDIR):/usr/src:ro \
+		--workdir /usr/src \
+		r.j3ss.co/shellcheck ./test.sh
