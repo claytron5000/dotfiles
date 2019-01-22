@@ -9,6 +9,9 @@ dotfiles: ## Installs the dotfiles.
 	ln -fn $(CURDIR)/gitignore $(HOME)/.gitignore;
 	git update-index --skip-worktree $(CURDIR)/.gitconfig;
 
+.PHONY: test
+test: shellcheck
+
 .PHONY: shellcheck
 shellcheck: ## Runs the shellcheck tests on the scripts.
 	docker run --rm -i $(DOCKER_FLAGS) \
@@ -16,3 +19,7 @@ shellcheck: ## Runs the shellcheck tests on the scripts.
 		-v $(CURDIR):/usr/src:ro \
 		--workdir /usr/src \
 		r.j3ss.co/shellcheck ./test.sh
+
+.PHONY: editor
+editor:
+	ln -f ./vscode/settings.json $(HOME)/Library/Application\ Support/Code/User/settings.json
