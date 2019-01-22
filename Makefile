@@ -21,5 +21,5 @@ shellcheck: ## Runs the shellcheck tests on the scripts.
 		r.j3ss.co/shellcheck ./test.sh
 
 .PHONY: editor
-editor:
+editor: ## We'll have to do something clever for linux/windows environments. 
 	ln -f ./vscode/settings.json $(HOME)/Library/Application\ Support/Code/User/settings.json
