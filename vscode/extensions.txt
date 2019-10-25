@@ -1,0 +1,5 @@
+jpoissonnier.vscode-styled-components
+msjsdiag.debugger-for-chrome
+PKief.material-icon-theme
+saviorisdead.RustyCode
+xabikos.ReactSnippets
